@@ -1,4 +1,4 @@
-var Promise = require('bluebird');
+var Q = require('q')
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var SALTDEPTH = 12;
@@ -19,22 +19,27 @@ var UserPrefsSchema = new mongoose.Schema({
   customnews2: String
 });
 
-//comparePasswords method
-UserPrefsSchema.methods.comparePasswords = function (pwSubmitted) {
-  //pw from db
-  var dbPassword = this.password;
-
   //bcrypt async compare
-  return new Promise(function (resolve, reject) {
-    bcrypt.compare(pwSubmitted, dbPassword, function (err, isMatch) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(isMatch);
-      }//end callback
-    });
-  });
-};
+
+
+// var Promise = require('bluebird')
+
+// function loadImageAsync(url) {
+//   return new Promise(function(resolve, reject) {
+//     var image = new Image();
+
+//     image.onload = function() {
+//       resolve(image);
+//     };
+
+//     image.onerror = function() {
+//       reject(new Error('Could not load image at ' + url));
+//     };
+
+//     image.src = url;
+//   });
+// }
+
 
 //pre hook
 //serial middleware "pre" hook http://mongoosejs.com/docs/middleware.html
@@ -63,6 +68,21 @@ UserPrefsSchema.pre('save', function (next) {
   });
 });
 
+//comparePasswords method
+UserPrefsSchema.methods.comparePasswords = function (pwSubmitted) {
+  //pw from db
+  var dbPassword = this.password;
+  return Q.Promise( function(resolve, reject) {
+
+    bcrypt.compare(pwSubmitted, dbPassword, function(err, isMatch) {
+      if(err) {reject (err)}
+        else {
+          resolve(isMatch)
+        }
+    })
+  })
+}
+
+var userPrefs = mongoose.model('UserPrefsSchema', UserPrefsSchema);
 //schema to model conversion and export
-var userPrefsModel = mongoose.model('userPrefs', UserPrefsSchema);
-module.exports = userPrefsModel;
+module.exports = userPrefs;

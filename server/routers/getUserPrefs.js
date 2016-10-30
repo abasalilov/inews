@@ -68,8 +68,11 @@ router.route('/signup')
   var user = {};
   user.username = req.body.username;
   user.password = req.body.password;
-  userPrefController.signup(user)
-  .then(function(data) {
+  userPrefController.signup(req, res, function(err, data) {
+    if(err) {
+      console.error(err)
+    }
+    console.log('data', data)
     res.send(data);
   })
 });
@@ -79,10 +82,11 @@ router.route('/signin')
 //Creating a new user, sign up, test url would be api/user/signin
 .post(function(req, res) {
   console.log('signin route');
-  var user;
-  user[username] = req.params.username;
-  user[password] = req.params.password;  
-  userPrefController.signin(user, function(err, data) {
+  var user= {};
+  console.log(req.body)
+  user.username = req.body.username;
+  user.password = req.body.password;  
+  userPrefController.signin(req, res, function(err, data) {
     if(err) {
       console.error(err)
     }
