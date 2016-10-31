@@ -22,7 +22,7 @@
 
 ## Usage
 
-> Upon visiting the site at:http://inews-staging.herokuapp.com/ signup using a unique username and password.
+> Upon visiting the site at: http://inews-staging.herokuapp.com/ signup using a unique username and password.
 
 Signup will auto login for you, once in, you'll be able to add two locations to your preferences for location based news. The primary newsfeed will default to your local city and aggregate current events.
 
