@@ -13,16 +13,22 @@
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-1. [Installing Dependencies](#installing-dependencies)
-1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+2. [Requirements](#requirements)
+3. [Development](#development)
+4. [Installing Dependencies](#installing-dependencies)
+5. [Tasks](#tasks)
+6. [Team](#team)
+7. [Contributing](#contributing)
 
 ## Usage
 
-> Some usage instructions
+> Upon visiting the site at:http://inews-staging.herokuapp.com/ signup using a unique username and password.
+
+Signup will auto login for you, once in, you'll be able to add two locations to your preferences for location based news. The primary newsfeed will default to your local city and aggregate current events.
+
+Signout will save your preferences automatically. When you revisit you will automatically see all your localized news feeds.
+
+This app is great for people traveling who want quick access to location based news.
 
 ## Requirements
 
@@ -33,12 +39,21 @@
 
 ## Development
 
+- Gulp 3.9.x
+- Karma 1.3.x
+- Chai 3.5.x
+- Mocha 3.1.x
+- Browser-sync 2.17.x
+
 ### Installing Dependencies
 
 From within the root directory:
 
 ```sh
 npm install
+//postinstall installs bower dependencies 
+//automatically
+
 ```
 ### Roadmap
 
